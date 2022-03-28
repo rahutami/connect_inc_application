@@ -16,8 +16,7 @@ class UserController extends Controller
 
     public function create(Request $request)
     {
-        // Validate the request...
- 
+
         $user = new User;
         
         $user->username = $request->username;
@@ -30,8 +29,11 @@ class UserController extends Controller
     
     public function update(Request $request, $id)
     {
-        // Validate the request...
         $user = User::find($id);
+
+        if(!$user){
+            return response(["message" => "user not found"], 404);
+        }
         
         if($request->has('username')){
             $user->username = $request->username;
@@ -44,10 +46,6 @@ class UserController extends Controller
         if($request->has('phone_no')){
             $user->phone_no = $request->phone_no;
         }
-        
-        if($request->has('password')){
-            $user->password = $request->password;
-        }
  
         $user->save();
 
@@ -56,8 +54,11 @@ class UserController extends Controller
     
     public function getOne(Request $request, $id)
     {
-        // Validate the request...
         $user = User::select('username', 'email', 'phone_no')->find($id);
+
+        if(!$user){
+            return response(["message" => "user not found"], 404);
+        }
 
         return $user;
     }

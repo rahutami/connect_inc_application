@@ -17,12 +17,12 @@ Docker is used as the development environment for this application
     Users are able to edit user information.
 
 ## How to Run
-1. Run Docker Desktop on your computer
-2. In the project's directory run command below to start sail: 
-```linux
-./vendor/bin/sail up -d
+1. Copy `.env.example` file to a new file called`.env`
+2. Change the `DB_DATABASE` value to the path of the application in your computer
 ```
-3. Once all the services up and running, run command below to start the app
+DB_DATABASE={{path to the application's directory}}/database/database.sqlite
+```
+3. Run command below to start the app
 ```terminal
 php artisan serve
 ```
